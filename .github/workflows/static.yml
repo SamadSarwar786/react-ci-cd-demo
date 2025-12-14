@@ -3,6 +3,8 @@ name: CI-CD React App
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -25,16 +27,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Lint
-      #   run: npm run lint || true
-
       - name: Build
         run: npm run build
 
       - name: Upload build
         uses: actions/upload-pages-artifact@v3
         with:
-            # Upload only the dist folder
           path: dist
 
   deploy:
